@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGMI Survival Guide | HTML Demo</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL RESET & VARIABLES --- */
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #ff9f1c; /* BGMI Orange/Gold */
+            --text-color: #e0e0e0;
+            --sub-text: #a0a0a0;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at top, #2a2a30 0%, #121214 60%);
+        }
+
+        /* --- 2. HEADER & NAVIGATION --- */
+        header {
+            background-color: rgba(30, 30, 36, 0.95);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(255, 159, 28, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(255, 159, 28, 0.5);
+            margin-bottom: 5px;
+        }
+
+        header .subtitle {
+            font-style: italic;
+            color: var(--sub-text);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: var(--font-head);
+            text-decoration: none;
+            color: #ffffff;
+            background: #2b2b30;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            text-transform: uppercase;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-color);
+            font-weight: 700;
+            transform: translateY(-2px);
+        }
+
+        /* --- 3. MAIN LAYOUT --- */
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Card Styling */
+        .content-card {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        h2 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* --- 4. TEXT & LISTS --- */
+        p { margin-bottom: 15px; }
+
+        ol {
+            margin-left: 20px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px 40px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+
+        li { margin-bottom: 10px; }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #444, transparent);
+            margin: 30px 0;
+        }
+
+        strong { color: #fff; }
+
+        /* Scientific Notation Styling */
+        sup, sub { color: var(--accent-color); font-weight: bold; }
+
+        /* --- 5. DEFINITION LIST (LOADOUT) --- */
+        dl {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        dt {
+            font-family: var(--font-head);
+            font-weight: bold;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            text-align: right;
+            padding-right: 15px;
+            border-right: 2px solid #444;
+        }
+
+        dd { margin: 0; color: #ccc; }
+
+        /* --- 6. TABLE STYLING --- */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #18181b;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2b2b30;
+            color: var(--accent-color);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        td { border-bottom: 1px solid #2a2a30; }
+
+        tr:last-child td { border-bottom: none; }
+
+        tbody tr { transition: background 0.2s; }
+
+        tbody tr:hover {
+            background-color: rgba(255, 159, 28, 0.1); /* Subtle orange tint on hover */
+        }
+
+        /* Highlight the Kills/Winner numbers */
+        td:nth-child(2), td:nth-child(3) {
+            font-family: var(--font-head);
+            font-weight: bold;
+        }
+
+        /* --- 7. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #0d0d0f;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 600px) {
+            dl { grid-template-columns: 1fr; text-align: left; }
+            dt { text-align: left; border-right: none; border-bottom: 2px solid #444; width: fit-content; margin-bottom: 5px; }
+            dd { margin-bottom: 20px; }
+            header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HTML Practical Demo</h1>
+        <p class="subtitle">Designed for the Ultimate BGMI Experience</p>
+        
+        <nav>
+            <a href="blogging css.html" class="active">Home</a>
+            <a href="Content css.html">Blog Content</a>
+            <a href="Form css.html">User Form</a>
+            <a href="Media css.html">Media Gallery</a>
+            <a href="Help css.html">Help / Support</a>
+        </nav>
+        </header>
+
+    <main>
+        <section class="content-card">
+            <h2>Article: Erangel Survival Guide</h2>
+            <p>To secure that <strong style="color:var(--accent-color)">Winner Winner Chicken Dinner</strong>, adhere to the tactical protocol:</p>
+            <ol>
+                <li>Avoid the <strong>Red Zone</strong> at all costs.</li>
+                <li>Keep your <strong>Energy Drinks</strong> ready for boost.</li>
+                <li>Use <strong>M416</strong> with 6x (adjusted to 3x) for sprays.</li>
+            </ol>
+            
+            <hr>
+
+            <p><strong>System Check:</strong> Squad health is <span style="color:#4caf50">100%</span>.</p>
+            <p><strong>Stay Hydrated:</strong> H<sub>2</sub>O is essential for long gaming sessions.</p>
+            <p><strong>Your Rank:</strong> 1<sup>st</sup> Tier Conqueror.</p>
+        </section>
+
+        <section class="content-card">
+            <h2>Squad Loadout</h2>
+            <dl>
+                <dt>Assaulter</dt>
+                <dd>Carries 7.62mm ammo, AKM, and Molotovs.</dd>
+                
+                <dt>Sniper</dt>
+                <dd>Carries 8x scope, AWM, and Ghillie Suit.</dd>
+                
+                <dt>Support</dt>
+                <dd>Carries Smoke Grenades and Med Kits.</dd>
+            </dl>
+        </section>
+
+        <section class="content-card">
+            <h2>Top Players This Week</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Kills</th>
+                        <th>Chicken Dinners</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chaitanya</td>
+                        <td>45</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>GamerPro</td>
+                        <td>38</td>
+                        <td>08</td>
+                    </tr>
+                     <tr>
+                        <td>Venom_X</td>
+                        <td>32</td>
+                        <td>05</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HTML Practical Checklist - Content Page | Created with Code</p>
+    </footer>
+
+</body>
+</html>

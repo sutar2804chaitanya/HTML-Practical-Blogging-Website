@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGMI Dev Hub | HTML Practical</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #ff9f1c; /* BGMI Orange */
+            --accent-glow: rgba(255, 159, 28, 0.4);
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: #333;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at top, #2a2a30 0%, #121214 70%);
+            min-height: 100vh;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: rgba(30, 30, 36, 0.95);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--accent-glow);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- 4. NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: var(--font-head);
+            text-decoration: none;
+            color: #fff;
+            background: #2b2b30;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-color);
+            font-weight: 700;
+            transform: translateY(-2px);
+        }
+
+        /* --- 5. MAIN CONTENT --- */
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Welcome Section */
+        .welcome-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .welcome-card h2 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .welcome-card .highlight {
+            background: rgba(255, 159, 28, 0.1);
+            color: var(--accent-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            border: 1px solid var(--accent-color);
+        }
+
+        /* Project Goals Grid */
+        .goals-section h3 {
+            font-family: var(--font-head);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .goal-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* A subtle gradient line on the left of cards */
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--accent-color);
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            border-color: var(--accent-color);
+        }
+
+        .goal-card h4 {
+            font-family: var(--font-head);
+            margin-top: 0;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .goal-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        
+        code {
+            background: #111;
+            color: var(--accent-color);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* --- 6. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0d0d0f;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .welcome-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>BGMI Dev Hub</h1>
+            <p>HTML Practical Demonstration | Created by Chaitanya</p>
+            
+            <nav>
+                <a href="blogging css.html" class="active">Home</a>
+                <a href="Content css.html">Blog Content</a>
+                <a href="Form css.html">User Form</a>
+                <a href="Media css.html">Media Gallery</a>
+                <a href="Help css.html">Help / Support</a>
+            </nav>
+            </div>
+    </header>
+
+    <main>
+        
+        <article class="welcome-card" id="home">
+            <h2>Welcome to the Hub</h2>
+            <p>
+                Hello! I am <strong style="color:#fff">Chaitanya</strong>, a learner and a gamer. 
+                This website is a comprehensive <span class="highlight">HTML Practical Project</span> 
+                designed to showcase exactly <strong>47 HTML tags</strong>.
+            </p>
+            <br>
+            <p>
+                This website was conceptually created while playing BGMI, merging the world of gaming 
+                with web development structure. Use the navigation menu above to explore the different 
+                sections of this assignment.
+            </p>
+        </article>
+
+        <section class="goals-section">
+            <h3>Project Goals</h3>
+            <div class="goals-grid">
+                
+                <div class="goal-card">
+                    <h4>Semantic Structure</h4>
+                    <p>Demonstrate proper HTML5 document structure using specific tags like <code>&lt;Article&gt;</code>, <code>&lt;Header&gt;</code>, and <code>&lt;Nav&gt;</code>.</p>
+                </div>
+
+                <div class="goal-card">
+                    <h4>User Interaction</h4>
+                    <p>Implement a full User Interaction Form to capture user data effectively using input validations and fieldsets.</p>
+                </div>
+
+                <div class="goal-card">
+                    <h4>Media Integration</h4>
+                    <p>Showcase rich media integration including native Audio and Video players styled to fit the gaming theme.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HTML Practical Checklist - Home Page.</p>
+    </footer>
+
+</body>
+</html>

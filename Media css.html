@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery | HTML Practical</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #ff9f1c; /* BGMI Orange */
+            --accent-glow: rgba(255, 159, 28, 0.4);
+            --text-color: #e0e0e0;
+            --border-color: #333;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: radial-gradient(circle at top, #2a2a30 0%, #121214 70%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: rgba(30, 30, 36, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        header .subtitle { color: #a0a0a0; font-style: italic; font-size: 0.9rem; margin-bottom: 15px; }
+
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        nav a {
+            font-family: var(--font-head);
+            text-decoration: none;
+            color: #fff;
+            background: #2b2b30;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- 4. MEDIA LAYOUT --- */
+        main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+
+        h2 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Grid for Media Items */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .media-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            border-color: var(--accent-color);
+        }
+
+        .media-card h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        /* --- 5. SPECIFIC MEDIA STYLES --- */
+        
+        /* Images */
+        figure { margin: 0; }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 2px solid #333;
+        }
+        figcaption {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* IFRAMES (Maps/External Sites) */
+        iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            border-radius: 4px;
+            background: #000;
+        }
+
+        /* Video */
+        video {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            background: #000;
+        }
+
+        /* Audio Player Styling */
+        .audio-container {
+            background: #25252b;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50; /* Green for 'Comms Online' */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        audio {
+            width: 100%;
+            filter: invert(0.9) hue-rotate(180deg); /* Dark Mode Audio Player Hack */
+            opacity: 0.8;
+        }
+
+        /* --- 6. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0d0d0f;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HTML Practical Demonstration</h1>
+        <p class="subtitle">This website is created while playing BGMI game</p>
+        
+        <nav>
+            <a href="blogging css.html">Home</a>
+            <a href="Content css.html">Blog Content</a>
+            <a href="Form css.html">User Form</a>
+            <a href="Media css.html" class="active">Media Gallery</a>
+            <a href="Help css.html">Help / Support</a>
+        </nav>
+        </header>
+
+    <main>
+        
+        <section>
+            <h2>Visual & Interactive Media</h2>
+            <div class="media-grid">
+                
+                <div class="media-card">
+                    <h3>Winning Moment</h3>
+                    <figure>
+                        <img src="c:\Users\chait\OneDrive\Desktop\Blogging with css\game_photo.jpeg.jpeg" alt="BGMI Winner">
+                        <figcaption>Fig 1: Winner Winner Chicken Dinner</figcaption>
+                    </figure>
+                </div>
+
+                <div class="media-card">
+                    <h3>Drop Location (Map)</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.119140224424!2d77.2090!3d28.6139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzUwLjAiTiA3N8KwMTInMzIuNCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section>
+            <h2>Audio & Video Gallery</h2>
+            <div class="media-grid">
+                
+                <div class="media-card audio-container">
+                    <h3><span style="color:#4caf50">●</span> Radio Voice Pack</h3>
+                    <p style="font-size:0.8rem; color:#888;">"Enemies Ahead!"</p>
+                    <audio controls>
+                        <source src="c:\Users\chait\OneDrive\Desktop\Blogging with css\WhatsApp Audio 2026-01-08 at 10.43.03 PM.mpeg" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <div class="media-card" style="grid-column: span 1;">
+                    <h3>Game Highlight Clip</h3>
+                    <video controls poster="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+                        <source src="c:\Users\chait\OneDrive\Desktop\Blogging with css\game_video.mp4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 HTML Practical Checklist - Media Page</p>
+    </footer>
+
+</body>
+</html>

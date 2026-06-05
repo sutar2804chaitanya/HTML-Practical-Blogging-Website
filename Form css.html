@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squad Recruitment | HTML Practical</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #ff9f1c; /* BGMI Orange */
+            --accent-glow: rgba(255, 159, 28, 0.4);
+            --text-color: #e0e0e0;
+            --input-bg: #2a2a30;
+            --border-color: #444;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at top, #2a2a30 0%, #121214 70%);
+            min-height: 100vh;
+            /* Added smooth scrolling */
+            scroll-behavior: smooth;
+        }
+
+        /* --- 3. HEADER & ANIMATION --- */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        header {
+            background-color: rgba(30, 30, 36, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            position: sticky; top: 0; z-index: 100;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent-glow);
+            transition: text-shadow 0.3s;
+        }
+        
+        header h1:hover {
+            text-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+            cursor: default;
+        }
+
+        header .subtitle { color: #a0a0a0; font-style: italic; font-size: 0.9rem; margin-bottom: 15px; }
+
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        nav a {
+            font-family: var(--font-head);
+            text-decoration: none;
+            color: #fff;
+            background: #2b2b30;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-color);
+            font-weight: bold;
+            transform: scale(1.05);
+        }
+
+        /* Click Ripple Effect for Nav */
+        nav a:active { transform: scale(0.95); }
+
+        /* --- 4. FORM LAYOUT & ANIMATION --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        main { 
+            max-width: 700px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+            animation: fadeIn 1s ease-out 0.3s backwards; /* Delays entrance */
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            transition: box-shadow 0.3s;
+        }
+
+        section:hover {
+            box-shadow: 0 15px 40px rgba(255, 159, 28, 0.1);
+        }
+
+        fieldset {
+            border: 2px solid var(--accent-color);
+            padding: 25px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        legend {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            padding: 0 15px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* --- 5. INPUT STYLING --- */
+        .form-group { 
+            margin-bottom: 20px; 
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ccc;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        /* Input styling with left border animation on focus */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="search"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid transparent; /* Prepare for animation */
+            color: #fff;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+
+        input:hover, textarea:hover, select:hover {
+            background-color: #32323a;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            border-left: 8px solid var(--accent-color); /* Strong indicator */
+            box-shadow: 0 0 15px rgba(255, 159, 28, 0.2);
+            background-color: #1e1e24;
+            padding-left: 15px; /* Text shifts slightly */
+        }
+        
+        /* Focus-within allows label highlighting */
+        .form-group:focus-within label {
+            color: var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-glow);
+        }
+
+        /* Range Slider Customization */
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+            height: 5px;
+            border-radius: 5px;
+            background: #444;
+            outline: none;
+            appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--accent-color);
+            transition: transform 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+        }
+
+        /* Radio & Checkbox */
+        .inline-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: var(--input-bg);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+        
+        .inline-group:hover { border-color: #666; }
+
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: var(--accent-color);
+            transform: scale(1.2);
+            margin-right: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        input[type="radio"]:checked, input[type="checkbox"]:checked {
+            transform: scale(1.4);
+        }
+
+        /* File Upload */
+        input[type="file"] {
+            background: var(--input-bg);
+            padding: 10px;
+            border: 1px dashed var(--border-color);
+            cursor: pointer;
+        }
+        input[type="file"]:hover {
+            border-color: var(--accent-color);
+            background: rgba(255, 159, 28, 0.05);
+        }
+
+        /* --- 6. BUTTONS & PULSE ANIMATION --- */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 159, 28, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 159, 28, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 159, 28, 0); }
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: #000;
+            font-family: var(--font-head);
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            padding: 15px 30px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: pulse 2s infinite; /* Continuous pulse */
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 25px var(--accent-color);
+            transform: translateY(-2px);
+            animation: none; /* Stop pulse on hover */
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* --- 7. MODAL (DIALOG) --- */
+        dialog {
+            background: var(--card-bg);
+            color: #fff;
+            border: 2px solid var(--accent-color);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: auto;
+            box-shadow: 0 0 50px rgba(255, 159, 28, 0.3);
+            max-width: 400px;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        /* Styles for when dialog is open */
+        dialog[open] {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        dialog::backdrop {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        dialog h3 { 
+            color: var(--accent-color); 
+            margin-bottom: 10px; 
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+        }
+        
+        .close-btn {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: var(--font-head);
+        }
+        
+        .close-btn:hover { 
+            background: #fff; 
+            color: #000; 
+            box-shadow: 0 0 10px #fff;
+        }
+
+        /* --- 8. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0d0d0f;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HTML Practical Demonstration</h1>
+        <p class="subtitle">This website is created while playing BGMI game</p>
+        <nav>
+            <a href="blogging css.html" class="active">Home</a>
+            <a href="Content css.html">Blog Content</a>
+            <a href="Form css.html">User Form</a>
+            <a href="Media css.html">Media Gallery</a>
+            <a href="Help css.html">Help / Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <form onsubmit="event.preventDefault(); showDialog();">
+                <fieldset>
+                    <legend>Squad Recruitment Form</legend>
+
+                    <div class="form-group">
+                        <label for="gamerID">Gamer ID:</label>
+                        <input type="text" id="gamerID" placeholder="Enter In-Game Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Secret Password:</label>
+                        <input type="password" id="password" placeholder="Squad Access Code">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Accept Match Rules:</label>
+                        <div class="inline-group">
+                            <label><input type="checkbox" required> I agree to play fair</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Server Region:</label>
+                        <div class="inline-group">
+                            <label><input type="radio" name="region" value="Asia" checked> Asia</label>
+                            <label><input type="radio" name="region" value="Europe"> Europe</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="screenshot">Upload Screenshot (K/D Ratio):</label>
+                        <input type="file" id="screenshot">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="matchDate">Last Match Date:</label>
+                        <input type="date" id="matchDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kills">Total Kills:</label>
+                        <input type="number" id="kills" min="0" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Contact Email:</label>
+                        <input type="email" id="email" placeholder="squad@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="volume">Mic Volume Level:</label>
+                        <input type="range" id="volume" min="0" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="search">Search Players:</label>
+                        <input type="search" id="search" placeholder="Find teammates...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Squad Bio:</label>
+                        <textarea id="bio" rows="4" placeholder="Describe your playstyle..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>🚀</span> JOIN SQUAD
+                    </button>
+
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <dialog id="myDialog">
+        <h3>System Check</h3>
+        <p>Squad Connection Secure!</p>
+        <p style="color: #4caf50; font-weight: bold; margin-top: 10px;">Ping: 20ms</p>
+        <button class="close-btn" onclick="closeDialog()">Close</button>
+    </dialog>
+
+    <footer>
+        <p>&copy; 2026 HTML Practical Checklist - User Form Page</p>
+    </footer>
+
+    <script>
+        const dialog = document.getElementById("myDialog");
+
+        function showDialog() {
+            dialog.showModal();
+        }
+
+        function closeDialog() {
+            // Adds a small fade-out effect via class toggling could be added here, 
+            // but for simple CSS, we just close it.
+            dialog.close();
+        }
+    </script>
+
+</body>
+</html>

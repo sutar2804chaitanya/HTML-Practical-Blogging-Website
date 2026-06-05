@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center | HTML Practical</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #ff9f1c; /* BGMI Orange */
+            --accent-glow: rgba(255, 159, 28, 0.4);
+            --text-color: #e0e0e0;
+            --border-color: #333;
+            --font-head: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace; /* New font for terminal look */
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: radial-gradient(circle at top, #2a2a30 0%, #121214 70%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: rgba(30, 30, 36, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        header h1 {
+            font-family: var(--font-head);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        header .subtitle { color: #a0a0a0; font-style: italic; font-size: 0.9rem; margin-bottom: 15px; }
+
+        nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        nav a {
+            font-family: var(--font-head);
+            text-decoration: none;
+            color: #fff;
+            background: #2b2b30;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* --- 4. MAIN CONTENT --- */
+        main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+        h2 {
+            font-family: var(--font-head);
+            color: #fff;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Section Containers */
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- 5. USER GUIDANCE (Grid Steps) --- */
+        .intro-text { margin-bottom: 20px; color: #aaa; }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 6px;
+            border-top: 2px solid var(--accent-color);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 159, 28, 0.1);
+        }
+
+        .step-number {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: 900;
+        }
+
+        .step-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+        }
+
+        /* --- 6. TABLE STYLING (Server Status) --- */
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-family: var(--font-mono);
+        }
+
+        .status-table th {
+            background: #000;
+            color: var(--accent-color);
+            text-align: left;
+            padding: 15px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .status-table td {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 5px currentColor;
+        }
+
+        .online { color: #4caf50; background-color: #4caf50; } /* Green */
+        .gaming { color: #ff9f1c; background-color: #ff9f1c; } /* Orange */
+
+        /* --- 7. TERMINAL / HELP SECTION --- */
+        .terminal-box {
+            background: #000;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            color: #0f0; /* Terminal Green */
+        }
+
+        .cmd {
+            display: block;
+            background: #111;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid var(--accent-color);
+            color: #fff;
+        }
+
+        .help-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: var(--accent-color);
+            color: #000;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .help-btn:hover { background: #fff; }
+
+        /* --- 8. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0d0d0f;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HTML Practical Demonstration</h1>
+        <p class="subtitle">This website is created while playing BGMI game</p>
+        
+        <nav>
+            <a href="blogging css.html">Home</a>
+            <a href="Content css.html">Blog Content</a>
+            <a href="Form css.html">User Form</a>
+            <a href="Media css.html">Media Gallery</a>
+            <a href="Help css.html" class="active">Help / Support</a>
+        </nav>
+        </header>
+
+    <main>
+        
+        <section>
+            <h2>User Guidance</h2>
+            <p class="intro-text">Welcome to the Support Center. If you are a new user, please follow these tactical steps to navigate the base:</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-number">01</span>
+                    <h3>Blog Content</h3>
+                    <p>Visit this page to see our latest BGMI tactics, survival guides, and Erangel match statistics.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-number">02</span>
+                    <h3>User Form</h3>
+                    <p>Go here to register your squad. Make sure to fill in all required fields like Gamer ID and Region.</p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-number">03</span>
+                    <h3>Media Gallery</h3>
+                    <p>Watch our gameplay videos, analyze maps, and listen to radio voice packs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Support Availability</h2>
+            <p class="intro-text">Our dev team (Chaitanya) is available for queries during these hours:</p>
+            
+            <table class="status-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Support Status</th>
+                        <th>Time (IST)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday - Friday</td>
+                        <td><span class="status-dot online"></span>Online</td>
+                        <td>10:00 AM - 06:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday - Sunday</td>
+                        <td><span class="status-dot gaming"></span>Gaming Mode</td>
+                        <td>Available on Discord</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Need More Help?</h2>
+            <div class="terminal-box">
+                <p>System Command:</p>
+                <code class="cmd">/call-6355264247 --urgent</code>
+                <p>For urgent issues, bugs, or account recovery, please initialize a direct connection.</p>
+                <br>
+                <p>Current System Version: <span style="color:var(--accent-color)">v2.0 Beta</span></p>
+                <br>
+                <a href="@bgmidemo.com" class="help-btn">Email Support</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HTML Practical Checklist - Help & Support Page</p>
+    </footer>
+
+</body>
+</html>
